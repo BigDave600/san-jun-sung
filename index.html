@@ -113,5 +113,38 @@
       <p>Phone: <a href="tel:+18148760690">+1 (814) 876-0690</a></p>
     </div>
   </div>
+  <div id="google_translate_element" style="display: none;"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  // Auto trigger translation
+  function triggerTranslation(lang) {
+    const select = document.querySelector("select.goog-te-combo");
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+    }
+  }
+
+  // Detect user language and translate
+  function detectAndTranslate() {
+    const userLang = navigator.language || navigator.userLanguage;
+    const langCode = userLang.split('-')[0]; // Get 'en' from 'en-US'
+    if (langCode !== 'en') {
+      setTimeout(() => {
+        triggerTranslation(langCode);
+      }, 2000); // Wait for dropdown to load
+    }
+  }
+
+  window.addEventListener('load', detectAndTranslate);
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
